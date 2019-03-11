@@ -61,6 +61,7 @@ branches:
   only:
     - master
     - maintable-beta
+    - concurrently
 
 # cache gradle dependencies
 # https://docs.travis-ci.com/user/languages/java#Caching
@@ -71,4 +72,3 @@ cache:
   directories:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
-
