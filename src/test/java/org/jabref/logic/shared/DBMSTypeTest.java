@@ -14,13 +14,15 @@ public class DBMSTypeTest {
     @Test
     public void testToString() {
         assertEquals("MySQL", DBMSType.MYSQL.toString());
+        assertEquals("MariaDB", DBMSType.MARIADB.toString());
         assertEquals("Oracle", DBMSType.ORACLE.toString());
         assertEquals("PostgreSQL", DBMSType.POSTGRESQL.toString());
     }
 
     @Test
     public void testGetDriverClassPath() {
-        assertEquals("org.mariadb.jdbc.Driver", DBMSType.MYSQL.getDriverClassPath());
+        assertEquals("com.mysql.cj.jdbc.Driver", DBMSType.MYSQL.getDriverClassPath());
+        assertEquals("org.mariadb.jdbc.Driver", DBMSType.MARIADB.getDriverClassPath());
         assertEquals("oracle.jdbc.driver.OracleDriver", DBMSType.ORACLE.getDriverClassPath());
         assertEquals("com.impossibl.postgres.jdbc.PGDriver", DBMSType.POSTGRESQL.getDriverClassPath());
     }
@@ -28,6 +30,7 @@ public class DBMSTypeTest {
     @Test
     public void testFromString() {
         assertEquals(DBMSType.MYSQL, DBMSType.fromString("MySQL").get());
+        assertEquals(DBMSType.MARIADB, DBMSType.fromString("MariaDB").get());
         assertEquals(DBMSType.ORACLE, DBMSType.fromString("Oracle").get());
         assertEquals(DBMSType.POSTGRESQL, DBMSType.fromString("PostgreSQL").get());
         assertFalse(DBMSType.fromString("XXX").isPresent());
@@ -35,6 +38,7 @@ public class DBMSTypeTest {
 
     @Test
     public void testGetUrl() {
+        assertEquals("jdbc:mysql://localhost:3306/xe?disableMariaDbDriver", DBMSType.MYSQL.getUrl("localhost", 3306, "xe"));
         assertEquals("jdbc:mariadb://localhost:3306/xe", DBMSType.MYSQL.getUrl("localhost", 3306, "xe"));
         assertEquals("jdbc:oracle:thin:@localhost:1521:xe", DBMSType.ORACLE.getUrl("localhost", 1521, "xe"));
         assertEquals("jdbc:pgsql://localhost:5432/xe", DBMSType.POSTGRESQL.getUrl("localhost", 5432, "xe"));
@@ -43,6 +47,7 @@ public class DBMSTypeTest {
     @Test
     public void testGetDefaultPort() {
         assertEquals(3306, DBMSType.MYSQL.getDefaultPort());
+        assertEquals(3306, DBMSType.MARIADB.getDefaultPort());
         assertEquals(5432, DBMSType.POSTGRESQL.getDefaultPort());
         assertEquals(1521, DBMSType.ORACLE.getDefaultPort());
     }
