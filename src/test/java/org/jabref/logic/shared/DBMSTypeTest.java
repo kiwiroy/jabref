@@ -39,7 +39,7 @@ public class DBMSTypeTest {
     @Test
     public void testGetUrl() {
         assertEquals("jdbc:mysql://localhost:3306/xe?disableMariaDbDriver", DBMSType.MYSQL.getUrl("localhost", 3306, "xe"));
-        assertEquals("jdbc:mariadb://localhost:3306/xe", DBMSType.MYSQL.getUrl("localhost", 3306, "xe"));
+        assertEquals("jdbc:mariadb://localhost:3306/xe", DBMSType.MARIADB.getUrl("localhost", 3306, "xe"));
         assertEquals("jdbc:oracle:thin:@localhost:1521:xe", DBMSType.ORACLE.getUrl("localhost", 1521, "xe"));
         assertEquals("jdbc:pgsql://localhost:5432/xe", DBMSType.POSTGRESQL.getUrl("localhost", 5432, "xe"));
     }

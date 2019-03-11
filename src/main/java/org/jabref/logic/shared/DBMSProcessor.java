@@ -574,7 +574,7 @@ public abstract class DBMSProcessor {
      */
     public static DBMSProcessor getProcessorInstance(DatabaseConnection connection) {
         DBMSType type = connection.getProperties().getType();
-        if (type == DBMSType.MYSQL) {
+        if ((type == DBMSType.MYSQL) || (type == DBMSType.MARIADB)) {
             return new MySQLProcessor(connection);
         } else if (type == DBMSType.POSTGRESQL) {
             return new PostgreSQLProcessor(connection);
